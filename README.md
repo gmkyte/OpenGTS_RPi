@@ -19,9 +19,13 @@ mysql -u root -p
 mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('myPassword');
 
 sudo /etc/init.d/mysql start
+
 // sudo apt-get install openjdk-7-jdk
+
 export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt
+
 echo "export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt" >> ~/.bashrc
+
 cd /tmp/
 wget -c https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.zip
 unzip apache-tomcat-8.5.5.zip
