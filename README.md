@@ -20,72 +20,131 @@ mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('myPassword');
 
 sudo /etc/init.d/mysql start
 
-// sudo apt-get install openjdk-7-jdk
+// Check where Java is installed on your Raspberry Pi and set environmentals correctly....
 
 export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt
 
 echo "export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt" >> ~/.bashrc
 
 cd /tmp/
+
 wget -c https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.5/bin/apache-tomcat-8.5.5.zip
+
 unzip apache-tomcat-8.5.5.zip
+
 sudo cp -a apache-tomcat-8.5.5 /usr/local/
+
 export CATALINA_HOME=/usr/local/apache-tomcat-8.5.5
+
 cd /usr/local
+
 sudo ln -s $CATALINA_HOME tomcat
+
 cd /usr/local/apache-tomcat-8.5.5/bin/
+
 ls -l
+
 chmod a+x *.sh
+
 ls -l
+
 $CATALINA_HOME/bin/startup.sh
+
 echo "export CATALINA_HOME=/usr/local/apache-tomcat-8.5.5" >> ~/.bashrc
+
 cd /tmp/
+
 wget -c https://downloads.mysql.com/archives/get/file/mysql-connector-java-5.1.37.zip
+
 unzip mysql-connector-java-5.1.37.zip
+
 cd mysql-connector-java-5.1.37
+
 ls -l
+
 sudo cp mysql-connector-java-5.1.37-bin.jar $JAVA_HOME/jre/lib/ext
+
 cd /tmp/
+
 wget -c http://central.maven.org/maven2/javax/mail/javax.mail-api/1.5.2/javax.mail-api-1.5.2.jar
+
 ls -l
+
 sudo cp javax.mail-api-1.5.2.jar $JAVA_HOME/jre/lib/ext
+
 sudo mv $JAVA_HOME/jre/lib/ext/javax.mail-api-1.5.2.jar $JAVA_HOME/jre/lib/ext/javax.mail.jar
+
 wget -c https://sourceforge.net/projects/opengts/files/server-base/2.6.4/OpenGTS_2.6.4.zip/download
+
 sudo mv download OpenGTS_2.6.4.zip
+
 sudo unzip /tmp/OpenGTS_2.6.4.zip -d /usr/local
+
 sudo chown -R pi:sudo /usr/local/OpenGTS_2.6.4
+
 export GTS_HOME=/usr/local/OpenGTS_2.6.4
+
 export ANT_HOME=/usr/share/ant
+
 echo "export GTS_HOME=/usr/local/OpenGTS_2.6.4" >> ~/.bashrc
+
 echo "export ANT_HOME=/usr/share/ant" >> ~/.bashrc
+
 source ~/.bashrc
+
 sudo ln -s $JAVA_HOME /usr/local/jvm
+
 sudo ln -s $CATALINA_HOME /usr/local/tomcat
+
 sudo ln -s $GTS_HOME /usr/local/gts
+
 sudo ln -s /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt /usr/local/java
+
 nano $GTS_HOME/config.conf //uncomment db user and password lines.....
+
 ls -l $CATALINA_HOME
+
 unlink /usr/local/apache-tomcat-8.5.5/apache-tomcat-8.5.5
+
 ls -l $CATALINA_HOME
+
 cd $GTS_HOME
+
 ant all
+
 // Open mysql and enter: GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'myPassword' WITH GRANT OPTION;
+
 bin/initdb.sh rootUser=root -rootPass=myPassword
+
 bin/checkInstall.sh
+
 bin/admin.sh Account -account=sysadmin -pass=myPassword -create
+
 ant track
+
 cp build/track.war $CATALINA_HOME/webapps
+
 $CATALINA_HOME/bin/shutdown.sh
+
 rm -rf $CATALINA_HOME/webapps/track
+
 cp $GTS_HOME/build/track.war $CATALINA_HOME/webapps/
+
 $CATALINA_HOME/bin/startup.sh
+
 ant events
+
 cp -v build/events.war $CATALINA_HOME/webapps/
+
 ant gprmc
+
 cp build/gprmc.war $CATALINA_HOME/webapps
+
 bin/checkInstall.sh
 
 Open browser at http://localhost:8080/track/Track and you are done.
+
+/==================================================================
 
 //To change header, edit the file below as required then save....
 
@@ -117,9 +176,16 @@ PrivateXML.pageTitle=Cabs 4 U GPS Taxi Tracking
 
 
 / Delete track folder and track.war from tomcat/webapps
-/ Go to gts folder and do ant all
-/ ant track.deploy
-/ ant events.deploy
-/ restart tomcat....
+
+cd $GTS_HOME
+
+ant all
+
+ant track.deploy
+
+ant events.deploy
+
+/ restart tomcat
+
 $CATALINA_HOME/bin/startup.sh
 
