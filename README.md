@@ -1,16 +1,12 @@
 # OpenGTS_RPi
 / Installing OpenGTS on a Raspberry Pi 3
-/ ======================================
-/ 
-/ After quite a few attempts, I have installed and tested OpenGTS onto a Rapsberry Pi 3.
-/ So, below is a complete installation method all done from the command line via an SSH connection
-/ using Putty.exe. The Raspberry Pi was initially set up using NOOBS, making sure that SSH is enabled.
-/ I hope you find this useful.
+After quite a few attempts, I have installed and tested OpenGTS onto a Rapsberry Pi 3.So, below is a complete installation method all done from the command line via an SSH connection using Putty.exe. The Raspberry Pi was initially set up using NOOBS, making sure that SSH is enabled. I hope you find this useful.
 
 sudo apt-get update
+
 sudo apt-get install apache2 php5 mysql-server libmysql-java ant unzip
 
-[Enter password for mysql root user]
+// Enter password for mysql root user.... (initial password is empty so just hit Enter....)
 
 mysql -u root -p
 
