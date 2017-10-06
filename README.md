@@ -141,7 +141,7 @@ Open browser at http://localhost:8080/track/Track and you are done.
 
 /==================================================================
 
-//To change header, edit the file below as required then save....
+/To change header, edit the file below as required then save....
 
 Config.conf changes  Changes made
 # -- private.xml: Page title
