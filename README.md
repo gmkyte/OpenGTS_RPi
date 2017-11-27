@@ -1,2 +1,2 @@
 # OpenGTS_RPi
-Installing OpenGTS on a Raspberry Pi 3. After quite a few failed attempts, I have now installed and tested OpenGTS onto a Rapsberry Pi 3. Below is a complete installation method all done from the command line via an SSH connection using Putty.exe. The Raspberry Pi was initially set up using NOOBS, making sure that SSH is enabled. I hope you find this useful.
+Installing OpenGTS on a Raspberry Pi 3 proved quite a challenge for me. After quite a few failed attempts, I have now successfully installed and tested OpenGTS onto a Rapsberry Pi 3. I have attached a complete installation method done manually from the command line via an SSH connection using Putty.exe. The Raspberry Pi was initially set up using NOOBS with SSH enabled. I hope you find this useful.
